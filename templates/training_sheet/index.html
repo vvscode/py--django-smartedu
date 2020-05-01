@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load map_by %}
 
 {% block title %} List of courses {% endblock title %}
 
@@ -6,7 +7,19 @@
     <h1>Our courses:</h1>
     <ul>
         {%  for course in courses %}
-            <li><a href="{%  url 'training_sheet.course' course.pk %}">{{ course.title }}</a></li>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3"><img src="https://dummyimage.com/300x200/f{{ course.pk }}/0{{ course.pk }}.jpg&text={{ course.title }}" class="img-fluid" alt="Course image"></div>
+                        <div class="col-9">
+                            <p class="float-right">Теги: {{ course.tags.all|map_by:'title'|join:", " }}</p>
+                            <h2 class="h5">{{ course.title }}</h2>
+                            <p>{{ course.description }}</p>
+                            <a href="{%  url 'training_sheet.course' course.pk %}" class="btn btn-outline-primary btn-sm mr-3 mb-2">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {%  endfor %}
     </ul>
 {% endblock content %}

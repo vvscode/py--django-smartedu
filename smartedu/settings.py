@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # custom apps
+    "common.apps.CommonConfig",
     "training_sheet.apps.TrainingSheetConfig",
 ]
 
