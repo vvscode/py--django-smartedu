@@ -42,10 +42,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # addons
+    "crispy_forms",
     # custom apps
     "common.apps.CommonConfig",
     "training_sheet.apps.TrainingSheetConfig",
 ]
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
