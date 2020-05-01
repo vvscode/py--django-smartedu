@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+rm -rf db.sqlite3
+
 python manage.py migrate
 
 # https://docs.djangoproject.com/en/3.0/ref/django-admin/#django-admin-createsuperuser
