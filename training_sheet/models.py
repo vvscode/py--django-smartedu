@@ -4,57 +4,46 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Teacher(models.Model):
+class AbstractModel(models.Model):
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        data = [
+            f"{key}={value!r}"
+            for key, value in self.__dict__.items()
+            if not key.startswith("_")
+        ]
+        return f'{self.__class__.__name__}({", ".join(data)})'
+
+    def __repr__(self):
+        return str(self)
+
+
+class Teacher(AbstractModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     job_title = models.CharField(max_length=250)
     about_description = models.TextField()
 
-    def __str__(self):
-        return f"Teacher #{self.job_title}"
 
-    class Meta:
-        pass
-
-
-class Student(models.Model):
+class Student(AbstractModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"Student"
 
-
-class Tag(models.Model):
+class Tag(AbstractModel):
     title = models.CharField(max_length=200)
     slug = models.SlugField()
 
-    def __str__(self):
-        return f"Tag #{self.title}"
 
-    class Meta:
-        pass
-
-
-class Course(models.Model):
+class Course(AbstractModel):
     title = models.CharField(max_length=250)
     description = models.TextField()
     tags = models.ManyToManyField(Tag)
     course_teachers = models.ManyToManyField(Teacher)
 
-    def __str__(self):
-        return f"Course #{self.title}"
 
-    class Meta:
-        pass
-
-
-class Group(models.Model):
+class Group(AbstractModel):
     group_name = models.CharField(max_length=250)
     course = models.ForeignKey(Course, on_delete=models.PROTECT)
     students = models.ManyToManyField(Student)
     group_teachers = models.ManyToManyField(Teacher)
-
-    def __str__(self):
-        return f"Group: {self.group_name}"
-
-    class Meta:
-        pass
