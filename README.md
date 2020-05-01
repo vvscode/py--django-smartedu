@@ -6,6 +6,7 @@ It uses [`pipenv`](https://webdevblog.ru/pipenv-rukovodstvo-po-novomu-instrument
 
 1. Clone repository
 2. Go to project directory and run `pipenv install`
+3. Setup pre-commit hook with `pre-commit install` [[link]](https://github.com/cognitedata/python-pre-commit-hooks#install-the-pre-commit-hooks-by-running-this-command)
 
 ## Basic operations:
 

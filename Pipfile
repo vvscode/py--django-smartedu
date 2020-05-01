@@ -9,6 +9,8 @@ verify_ssl = true
 django = "*"
 gunicorn = "*"
 django-heroku = "*"
+pre-commit = "*"
+black = "*"
 
 [requires]
 python_version = "3.7"
