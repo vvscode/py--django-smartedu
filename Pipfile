@@ -4,14 +4,13 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pre-commit = "*"
+black = "==19.10b0"
 
 [packages]
 django = "*"
 gunicorn = "*"
 django-heroku = "*"
-pre-commit = "*"
-black = "*"
-faker = "*"
 
 [requires]
 python_version = "3.7"
