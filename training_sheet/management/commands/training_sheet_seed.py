@@ -26,6 +26,7 @@ class Command(BaseCommand):
     def create_tags(self):
         for tag in tags:
             self.tags.append(Tag.objects.create(title=tag, slug=tag))
+        self.stdout.write(self.style.SUCCESS("Tags created"))
 
     def create_teachers(self):
         for i in range(10):
@@ -44,6 +45,7 @@ class Command(BaseCommand):
                     about_description=fake.paragraph(),
                 )
             )
+        self.stdout.write(self.style.SUCCESS("Teachers created"))
 
     def create_courses(self):
         for i in range(10):
@@ -55,8 +57,11 @@ class Command(BaseCommand):
                 random.sample(self.teachers, random.randint(1, len(self.teachers)))
             )
             self.courses.append(course)
+        self.stdout.write(self.style.SUCCESS("Courses created"))
 
     def handle(self, *args, **options):
         self.create_tags()
         self.create_teachers()
         self.create_courses()
+
+        self.stdout.write(self.style.SUCCESS("Done. Seeding completed"))

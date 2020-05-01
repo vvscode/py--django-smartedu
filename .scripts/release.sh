@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 python manage.py migrate
 
 # https://docs.djangoproject.com/en/3.0/ref/django-admin/#django-admin-createsuperuser
