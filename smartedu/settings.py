@@ -151,16 +151,23 @@ RQ_QUEUES = {
             "REDISTOGO_URL",
             "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601",
         ),  # If you're on Heroku
-        "DEFAULT_TIMEOUT": 1000,
+        "DEFAULT_TIMEOUT": 500,
     },
     "email": {
         "URL": os.getenv(
             "REDISTOGO_URL",
             "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601",
         ),  # If you're on Heroku
-        "DEFAULT_TIMEOUT": 1500,
+        "DEFAULT_TIMEOUT": 500,
     },
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_USE_TLS = True
+EMAIL_PORT = os.getenv("EMAIL_PORT", 587)
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "django.smartedu@gmail.com")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "701713Qwer")
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
