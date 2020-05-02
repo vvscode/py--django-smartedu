@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{%  block header %}
+    <meta http-equiv="refresh" content="{{ timeout }};URL={{ target_url }}">
+{% endblock header %}
+
+{% block content %}
+    <h1>{{ message| default:'Thanks'}}</h1>
+{#    <pre>#}
+{#    {{ data|pprint }}#}
+{#    </pre>#}
+{% endblock %}
