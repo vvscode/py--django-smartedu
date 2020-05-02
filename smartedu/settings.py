@@ -109,7 +109,7 @@ INTERNAL_IPS = [
     # ...
 ]
 
-ADMIN_EMAILS = [os.environ.get("ADMIN_EMAILS", "v.vanchuk@tut.by").split(",")]
+ADMIN_EMAILS = os.environ.get("ADMIN_EMAILS", "v.vanchuk@tut.by").split(",")
 
 
 # Password validation
