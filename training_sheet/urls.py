@@ -10,7 +10,7 @@ urlpatterns = [
         name="training_sheet.course_add",
     ),
     path(
-        "course/<int:course_id>/",
+        "course/<int:pk>/",
         views.CourseClassView.as_view(),
         name="training_sheet.course",
     ),

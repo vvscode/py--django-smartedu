@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from django.views import View
+from django.views.generic import DetailView
 from django.views.generic.list import ListView
 
 from training_sheet.forms import CourseForm
@@ -15,13 +16,8 @@ class CoursesListClassView(ListView):
     paginate_by = 5
 
 
-class CourseClassView(View):
-    def get(self, request, course_id):
-        return render(
-            request,
-            "training_sheet/course.html",
-            context={"course": get_object_or_404(Course, pk=course_id)},
-        )
+class CourseClassView(DetailView):
+    model = Course
 
 
 class CourseEditClassView(View):
