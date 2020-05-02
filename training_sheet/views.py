@@ -1,9 +1,10 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, redirect
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 # Create your views here.
-from django.views import View
+from django.urls import reverse
 from django.views.generic import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
 from training_sheet.forms import CourseForm
@@ -20,44 +21,40 @@ class CourseClassView(DetailView):
     model = Course
 
 
-class CourseEditClassView(View):
-    def get(self, request, course_id=None):
-        course = None if course_id is None else get_object_or_404(Course, pk=course_id)
-        return render(
-            request,
-            "training_sheet/course_form.html",
-            context={"form": CourseForm(instance=course)},
-        )
+class CourseCreateView(CreateView):
+    model = Course
+    fields = "__all__"
+    form = CourseForm
 
-    def post(self, request, course_id=None):
-        form = CourseForm(request.POST)
-        if form.is_valid():
-            form_data = form.cleaned_data
+    def get_success_url(self):
+        return reverse("training_sheet.course", kwargs={"pk": self.object.pk})
 
-            tags = form_data["tags"]
-            del form_data["tags"]
-
-            course_teachers = form_data["course_teachers"]
-            del form_data["course_teachers"]
-
-            course = (
-                Course.objects.create()
-                if course_id is None
-                else get_object_or_404(Course, pk=course_id)
-            )
-            for key, value in form_data.items():
-                setattr(course, key, value)
-
-            course.tags.set(tags)
-            course.course_teachers.set(course_teachers)
-            course.save()
-            return redirect("training_sheet.course", course.pk)
-
-        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.helper = FormHelper()
+        form.helper.add_input(Submit("submit", "Create", css_class="btn-primary"))
+        return form
 
 
-class CourseDeleteClassView(View):
-    def post(self, request, course_id):
-        course = get_object_or_404(Course, pk=course_id)
-        course.delete()
-        return redirect("training_sheet.index")
+class CourseEditView(UpdateView):
+    model = Course
+    fields = "__all__"
+    form = CourseForm
+
+    def get_success_url(self):
+        return reverse("training_sheet.course", kwargs={"pk": self.object.pk})
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.helper = FormHelper()
+        form.helper.add_input(Submit("submit", "Save", css_class="btn-primary"))
+        return form
+
+
+class CourseDeleteClassView(DeleteView):
+    model = Course
+
+    # success_url = reverse("training_sheet.index")
+    # Leads to django.core.exceptions.ImproperlyConfigured: The included URLconf 'smartedu.urls' does not appear to have any patterns in it
+    def get_success_url(self):
+        return reverse("training_sheet.index")

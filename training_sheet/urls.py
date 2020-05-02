@@ -6,7 +6,7 @@ urlpatterns = [
     path("", views.CoursesListClassView.as_view(), name="training_sheet.index"),
     path(
         "course/add/",
-        views.CourseEditClassView.as_view(),
+        views.CourseCreateView.as_view(),
         name="training_sheet.course_add",
     ),
     path(
@@ -15,12 +15,12 @@ urlpatterns = [
         name="training_sheet.course",
     ),
     path(
-        "course/edit/<int:course_id>/",
-        views.CourseEditClassView.as_view(),
+        "course/edit/<int:pk>/",
+        views.CourseEditView.as_view(),
         name="training_sheet.course_edit",
     ),
     path(
-        "course/delete/<int:course_id>/",
+        "course/delete/<int:pk>/",
         views.CourseDeleteClassView.as_view(),
         name="training_sheet.course_delete",
     ),

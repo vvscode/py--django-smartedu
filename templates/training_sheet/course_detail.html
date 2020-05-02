@@ -20,7 +20,7 @@
             <button class="btn btn-info">Edit</button>
         </form>
         {# POST, GET Are the only valid values for `method` in form https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-method   #}
-        <form method="POST" action="{% url 'training_sheet.course_delete' course.pk %}">
+        <form method="GET" action="{% url 'training_sheet.course_delete' course.pk %}">
             {% csrf_token %}
             <button class="btn btn-danger">Delete</button>
         </form>
