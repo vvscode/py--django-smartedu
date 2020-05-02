@@ -6,7 +6,6 @@ verify_ssl = true
 [dev-packages]
 pre-commit = "*"
 black = "==19.10b0"
-django-debug-toolbar = "*"
 
 [packages]
 django = "*"
@@ -14,6 +13,7 @@ gunicorn = "*"
 django-heroku = "*"
 faker = "*"
 django-crispy-forms = "*"
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.7"
