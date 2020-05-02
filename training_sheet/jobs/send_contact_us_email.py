@@ -6,7 +6,7 @@ from smartedu.settings import ADMIN_EMAILS, EMAIL_HOST_USER
 queue = django_rq.get_queue("email")
 
 
-def send_contact_us_email_to_user(subject, body, email):
+def send_contact_us_email_to_admins(subject, body, email):
     send_mail(
         subject=f'You have new message "{subject}"',
         message=f'You have message \n\n"{body}"\n\n from {email}',
@@ -15,7 +15,7 @@ def send_contact_us_email_to_user(subject, body, email):
     )
 
 
-def send_contact_us_email_to_admin(subject, body, email):
+def send_contact_us_email_to_user(subject, body, email):
     send_mail(
         subject=f'Thanks for you message "{subject}"',
         message=f'Your message \n\n"{body}"\n\n is sent to admins',
@@ -26,4 +26,4 @@ def send_contact_us_email_to_admin(subject, body, email):
 
 def send_contact_us_email(subject, body, email):
     queue.enqueue(send_contact_us_email_to_user, subject, body, email)
-    queue.enqueue(send_contact_us_email_to_admin, subject, body, email)
+    queue.enqueue(send_contact_us_email_to_admins, subject, body, email)
