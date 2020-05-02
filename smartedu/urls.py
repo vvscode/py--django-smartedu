@@ -20,6 +20,7 @@ from django.conf import settings
 urlpatterns = [
     path("", include("training_sheet.urls"), name="training_sheet"),
     path("admin/", admin.site.urls),
+    path("django-rq/", include("django_rq.urls")),
 ]
 
 if settings.DEBUG:

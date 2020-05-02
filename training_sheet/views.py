@@ -11,6 +11,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
 from training_sheet.forms import CourseForm, ContactUsForm
+from training_sheet.jobs.send_contact_us_email import send_contact_us_email
 from training_sheet.models import Course
 
 
@@ -96,6 +97,8 @@ class ContactUsView(View):
         form = ContactUsForm(request.POST)
         if form.is_valid():
             form_data = form.cleaned_data
+
+            send_contact_us_email(**form_data)
 
             request.session["soft_redirect_message"] = "Thanks for your message"
             request.session["soft_redirect_data"] = form_data

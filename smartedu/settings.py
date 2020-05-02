@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # addons
     "crispy_forms",
     "debug_toolbar",
+    "django_rq",
     # custom apps
     "common.apps.CommonConfig",
     "training_sheet.apps.TrainingSheetConfig",
@@ -108,6 +109,8 @@ INTERNAL_IPS = [
     # ...
 ]
 
+ADMIN_EMAILS = [os.environ.get("ADMIN_EMAILS", "v.vanchuk@tut.by").split(",")]
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -140,6 +143,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+# https://github.com/rq/django-rq#installation
+RQ_QUEUES = {
+    "default": {
+        "URL": os.getenv(
+            "REDISTOGO_URL",
+            "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601",
+        ),  # If you're on Heroku
+        "DEFAULT_TIMEOUT": 1000,
+    },
+    "email": {
+        "URL": os.getenv(
+            "REDISTOGO_URL",
+            "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601",
+        ),  # If you're on Heroku
+        "DEFAULT_TIMEOUT": 1500,
+    },
+}
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
