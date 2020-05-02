@@ -18,6 +18,12 @@ Run server locally:
 python manage.py runserver
 ```
 
+Run rq-worker locally
+
+```
+python manage.py rqworker email default
+```
+
 
 Apply migrations:
 ```
