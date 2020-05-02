@@ -1,0 +1,50 @@
+{% extends '_base.html' %}
+{% load map_by %}
+
+{% block title %} List of courses {% endblock title %}
+
+{% block content %}
+    <h1>Our courses:</h1>
+    <ul>
+        {%  for course in courses %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3"><img src="https://dummyimage.com/300x200/f{{ course.pk }}/0{{ course.pk }}.jpg&text={{ course.title }}" class="img-fluid" alt="Course image"></div>
+                        <div class="col-9">
+                            <p class="float-right">Теги: {{ course.tags.all|map_by:'title'|join:", " }}</p>
+                            <h2 class="h5">{{ course.title }}</h2>
+                            <p>{{ course.description }}</p>
+                            <a href="{%  url 'training_sheet.course' course.pk %}" class="btn btn-outline-primary btn-sm mr-3 mb-2">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {%  endfor %}
+    </ul>
+
+    {% if is_paginated %}
+        {#        https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html    #}
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+              {% if page_obj.number == i %}
+                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+          </ul>
+        </nav>
+    {% endif %}
+{% endblock content %}
