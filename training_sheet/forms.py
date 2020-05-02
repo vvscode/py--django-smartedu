@@ -7,7 +7,7 @@ from training_sheet.models import Course
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ("title", "description", "tags", "course_teachers")
+        fields = "__all__"
 
 
 class ContactUsForm(forms.Form):
