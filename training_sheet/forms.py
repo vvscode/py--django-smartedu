@@ -12,18 +12,14 @@ class CourseForm(forms.ModelForm):
 
 class ContactUsForm(forms.Form):
     subject = forms.CharField(
-        widget=forms.TextInput(
-            attrs={"placeholder": "Your message subject", "value": "111"}
-        )
+        widget=forms.TextInput(attrs={"placeholder": "Your message subject"})
     )
-    body = forms.CharField(
-        widget=forms.Textarea(attrs={"placeholder": "Your message", "value": "2222"})
-    )
-    email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"placeholder": "Email", "value": "asdf@asdf.ru"})
-    )
+    body = forms.CharField(widget=forms.Textarea(attrs={"placeholder": "Your message"}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"placeholder": "Email"}))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.add_input(Submit("submit", "Send", css_class="btn btn-primary"))
+        self.helper = FormHelper(form=self)
+        self.helper.add_input(
+            Submit("submit", "Send", css_class="btn btn-primary float-right")
+        )

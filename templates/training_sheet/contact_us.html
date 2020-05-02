@@ -2,6 +2,10 @@
 
 {% load crispy_forms_tags %}
 
+{%  block title %}
+    Send us an email
+{% endblock title %}
+
 {% block content %}
     {% csrf_token %}
     {% crispy form %}

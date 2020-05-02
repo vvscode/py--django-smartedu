@@ -6,6 +6,11 @@
     <meta http-equiv="refresh" content="{{ timeout }};URL={{ target_url }}">
 {% endblock header %}
 
+{%  block title %}
+    {{ message }}
+{% endblock title %}
+
+
 {% block content %}
     <h1>{{ message| default:'Thanks'}}</h1>
 {#    <pre>#}
