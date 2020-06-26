@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # custom apps
     "common.apps.CommonConfig",
     "training_sheet.apps.TrainingSheetConfig",
+    "rest_framework",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -174,3 +175,9 @@ LOGIN_REDIRECT_URL = "training_sheet.index"
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    ]
+}
