@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # custom apps
     "common.apps.CommonConfig",
     "training_sheet.apps.TrainingSheetConfig",
+    "rest_framework",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -170,5 +171,13 @@ EMAIL_PORT = os.getenv("EMAIL_PORT", 587)
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "django.smartedu@gmail.com")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "701713Qwer")
 
+LOGIN_REDIRECT_URL = "training_sheet.index"
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    ]
+}
