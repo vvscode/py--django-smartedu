@@ -170,5 +170,7 @@ EMAIL_PORT = os.getenv("EMAIL_PORT", 587)
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "django.smartedu@gmail.com")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "701713Qwer")
 
+LOGIN_REDIRECT_URL = "training_sheet.index"
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
