@@ -110,7 +110,7 @@ DATABASES = {
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configuring-internal-ips
 INTERNAL_IPS = [
     # ...
-    "127.0.0.1",
+    # "127.0.0.1",
     # ...
 ]
 
@@ -200,4 +200,13 @@ REST_REGISTRATION = {
     "REGISTER_VERIFICATION_ENABLED": False,
     "RESET_PASSWORD_VERIFICATION_ENABLED": False,
     "REGISTER_EMAIL_VERIFICATION_ENABLED": False,
+}
+
+
+def show_toolbar(request):
+    return not request.is_ajax() and "show_toolbar" in request.COOKIES
+
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": "smartedu.settings.show_toolbar",
 }
