@@ -31,7 +31,5 @@ urlpatterns = [
         views.CourseDeleteClassView.as_view(),
         name="training_sheet.course_delete",
     ),
-    path("accounts/login/", auth_views.LoginView.as_view(), name="login"),
-    path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("api/", include("training_sheet.api.urls", namespace="api")),
 ]

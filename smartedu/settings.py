@@ -37,6 +37,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "django.contrib.admin",
+    # https://django-registration-redux.readthedocs.io/en/latest/quickstart.html
+    "registration",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -185,3 +187,10 @@ REST_FRAMEWORK = {
 }
 
 GRAPHENE = {"SCHEMA": "smartedu.schema.schema"}
+
+ACCOUNT_ACTIVATION_DAYS = (
+    7  # One-week activation window; you may, of course, use a different value.
+)
+REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
+
+REGISTRATION_FORM = "training_sheet.forms.CustomRegistrationForm"

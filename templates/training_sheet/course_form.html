@@ -1,9 +1,6 @@
-{% extends '_base.html' %}
-
+{% extends 'base.html' %}
 {% block title %} {{ course_id }} {% endblock title %}
-
 {% load crispy_forms_tags %}
-
 {% block content %}
-    {% crispy form %}
+{% crispy form %}
 {% endblock %}

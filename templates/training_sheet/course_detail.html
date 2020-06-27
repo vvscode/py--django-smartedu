@@ -1,29 +1,25 @@
-{% extends '_base.html' %}
-
+{% extends 'base.html' %}
 {% block title %} {{ course_id }} {% endblock title %}
-
 {% block content %}
-    <h1>{{ course.title }}</h1>
-    <ul>
-        {%  for tag in course.tags.all %}
-            <li>{{ tag.title }}</li>
-        {% endfor %}
-    </ul>
-    <div>
-        {{ course.description }}
-    </div>
-    <hr />
-    <div class="row">
-
-        <form method="GET" action="{% url 'training_sheet.course_edit' course.pk %}">
-            {% csrf_token %}
-            <button class="btn btn-info">Edit</button>
-        </form>
-        {# POST, GET Are the only valid values for `method` in form https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-method   #}
-        <form method="GET" action="{% url 'training_sheet.course_delete' course.pk %}">
-            {% csrf_token %}
-            <button class="btn btn-danger">Delete</button>
-        </form>
-    </div>
-
+<h1>{{ course.title }}</h1>
+<ul>
+    {%  for tag in course.tags.all %}
+    <li>{{ tag.title }}</li>
+    {% endfor %}
+</ul>
+<div>
+    {{ course.description }}
+</div>
+<hr />
+<div class="row">
+    <form method="GET" action="{% url 'training_sheet.course_edit' course.pk %}">
+        {% csrf_token %}
+        <button class="btn btn-info">Edit</button>
+    </form>
+    {# POST, GET Are the only valid values for `method` in form https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-method   #}
+    <form method="GET" action="{% url 'training_sheet.course_delete' course.pk %}">
+        {% csrf_token %}
+        <button class="btn btn-danger">Delete</button>
+    </form>
+</div>
 {% endblock content %}

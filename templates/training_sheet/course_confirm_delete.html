@@ -1,11 +1,10 @@
-{% extends '_base.html' %}
-
+{% extends 'base.html' %}
 {% block content %}
-    <form method="POST" action="{% url "training_sheet.course_delete" course.pk %}">
-       {% csrf_token %}
-        <h2>You're going to remove course "{{ course.title }}"</h2>
-        <h3>Are you sure?</h3>
-        <input class="btn btn-danger" type="submit" value="DELETE" />
-        <input class="btn btn-info" type="reset" value="BACK" onclick="history.back()" />
-    </form>
+<form method="POST" action="{% url "training_sheet.course_delete" course.pk %}">
+    {% csrf_token %}
+    <h2>You're going to remove course "{{ course.title }}"</h2>
+    <h3>Are you sure?</h3>
+    <input class="btn btn-danger" type="submit" value="DELETE" />
+    <input class="btn btn-info" type="reset" value="BACK" onclick="history.back()" />
+</form>
 {% endblock %}

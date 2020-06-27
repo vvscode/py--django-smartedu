@@ -24,6 +24,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("django-rq/", include("django_rq.urls")),
     path("graphql/", GraphQLView.as_view(graphiql=True)),
+    path("accounts/", include("registration.backends.simple.urls")),
 ]
 
 if settings.DEBUG:

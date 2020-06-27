@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from .models import Teacher, Student, Tag, Course, Group, CustomUser
 
 # Register your models here.
+admin.site.register(CustomUser)
 admin.site.register(Teacher)
 admin.site.register(Student)
 admin.site.register(Tag)

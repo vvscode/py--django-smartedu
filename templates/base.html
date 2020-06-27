@@ -38,12 +38,16 @@
                         <a class="nav-link" href="{%  url 'training_sheet.contact_us' %}">Contact us</a>
                     </li>
                     {% if user.id %}
-                    <li class="nav-item {% if request.resolver_match.view_name == 'login' %}active{% endif %}">
-                        <a class="nav-link" href="{%  url 'logout' %}">Logout ({{user}})</a>
+                    <li class="nav-item {% if request.resolver_match.view_name == 'auth_login' %}active{% endif %}">
+                        <a class="nav-link" href="{%  url 'auth_logout' %}">Logout ({{user}})</a>
                     </li>
                     {% else %}
-                    <li class="nav-item {% if request.resolver_match.view_name == 'logout' %}active{% endif %}">
-                        <a class="nav-link" href="{%  url 'login' %}">Login</a>
+                    <li
+                        class="nav-item {% if request.resolver_match.view_name == 'registration_register' %}active{% endif %}">
+                        <a class="nav-link" href="{%  url 'registration_register' %}">Register</a>
+                    </li>
+                    <li class="nav-item {% if request.resolver_match.view_name == 'auth_logout' %}active{% endif %}">
+                        <a class="nav-link" href="{%  url 'auth_login' %}">Login</a>
                     </li>
                     {% endif %}
                 </ul>
