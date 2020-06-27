@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "training_sheet.apps.TrainingSheetConfig",
     "rest_framework",
     "graphene_django",
+    "cacheops",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -150,20 +151,18 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+REDISTOGO_URL = (
+    "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601"
+)
+
 # https://github.com/rq/django-rq#installation
 RQ_QUEUES = {
     "default": {
-        "URL": os.getenv(
-            "REDISTOGO_URL",
-            "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601",
-        ),  # If you're on Heroku
+        "URL": os.getenv("REDISTOGO_URL", REDISTOGO_URL,),  # If you're on Heroku
         "DEFAULT_TIMEOUT": 500,
     },
     "email": {
-        "URL": os.getenv(
-            "REDISTOGO_URL",
-            "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601",
-        ),  # If you're on Heroku
+        "URL": os.getenv("REDISTOGO_URL", REDISTOGO_URL,),  # If you're on Heroku
         "DEFAULT_TIMEOUT": 500,
     },
 }
@@ -210,3 +209,9 @@ def show_toolbar(request):
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": "smartedu.settings.show_toolbar",
 }
+
+CACHEOPS = {
+    "training_sheet.*": {"ops": "all", "timeout": 60 * 15},
+}
+
+CACHEOPS_REDIS = REDISTOGO_URL
