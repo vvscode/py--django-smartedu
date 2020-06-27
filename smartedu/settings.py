@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     # https://django-registration-redux.readthedocs.io/en/latest/quickstart.html
     "registration",
+    "rest_registration",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -194,3 +195,9 @@ ACCOUNT_ACTIVATION_DAYS = (
 REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
 
 REGISTRATION_FORM = "training_sheet.forms.CustomRegistrationForm"
+
+REST_REGISTRATION = {
+    "REGISTER_VERIFICATION_ENABLED": False,
+    "RESET_PASSWORD_VERIFICATION_ENABLED": False,
+    "REGISTER_EMAIL_VERIFICATION_ENABLED": False,
+}

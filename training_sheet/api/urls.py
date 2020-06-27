@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = "training_sheet"
@@ -24,4 +24,5 @@ urlpatterns = [
         views.TagListView.as_view({"get": "list", "post": "create"}),
         name="tag_list",
     ),
+    path("accounts/", include("rest_registration.api.urls")),
 ]

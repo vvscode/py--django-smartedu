@@ -20,6 +20,7 @@ djangorestframework = "*"
 graphene = "*"
 graphene-django = "*"
 django-registration-redux = "*"
+django-rest-registration = "*"
 
 [requires]
 python_version = "3.7"
