@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+python manage.py flush
+
 rm -rf db.sqlite3
 
 python manage.py migrate
