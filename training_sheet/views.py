@@ -20,6 +20,8 @@ class CoursesListClassView(ListView):
     context_object_name = "courses"
     paginate_by = 5
 
+    queryset = Course.objects.prefetch_related("tags")
+
 
 class CourseClassView(DetailView):
     model = Course
