@@ -17,6 +17,7 @@ django-debug-toolbar = "*"
 rq = "*"
 django-rq = "*"
 djangorestframework = "*"
+graphene = "*"
 
 [requires]
 python_version = "3.7"
