@@ -29,10 +29,12 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
+                    {% if user.id %}
                     <li
                         class="nav-item {% if request.resolver_match.view_name == 'training_sheet.course_add' %}active{% endif %}">
                         <a class="nav-link" href="{%  url 'training_sheet.course_add' %}">Add course</a>
                     </li>
+                    {% endif %}
                     <li
                         class="nav-item {% if request.resolver_match.view_name == 'training_sheet.contact_us' %}active{% endif %}">
                         <a class="nav-link" href="{%  url 'training_sheet.contact_us' %}">Contact us</a>
@@ -42,9 +44,8 @@
                         <a class="nav-link" href="{%  url 'auth_logout' %}">Logout ({{user}})</a>
                     </li>
                     {% else %}
-                    <li
-                        class="nav-item {% if request.resolver_match.view_name == 'registration_register' %}active{% endif %}">
-                        <a class="nav-link" href="{%  url 'registration_register' %}">Register</a>
+                    <li class="nav-item {% if request.resolver_match.view_name == 'ajax-register' %}active{% endif %}">
+                        <a class="nav-link" href="{%  url 'ajax-register' %}">Register</a>
                     </li>
                     <li class="nav-item {% if request.resolver_match.view_name == 'auth_logout' %}active{% endif %}">
                         <a class="nav-link" href="{%  url 'auth_login' %}">Login</a>
