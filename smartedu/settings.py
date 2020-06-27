@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "common.apps.CommonConfig",
     "training_sheet.apps.TrainingSheetConfig",
     "rest_framework",
+    "graphene_django",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -182,3 +183,5 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
     ]
 }
+
+GRAPHENE = {"SCHEMA": "smartedu.schema.schema"}
