@@ -1,9 +1,8 @@
 from django.core.management.base import BaseCommand
 from faker import Faker
 import random
-from django.contrib.auth.models import User
 
-from training_sheet.models import Tag, Teacher, Course
+from training_sheet.models import Tag, Teacher, Course, CustomUser
 
 fake = Faker()
 
@@ -32,8 +31,8 @@ class Command(BaseCommand):
         for i in range(10):
             first_name = fake.first_name()
             last_name = fake.last_name()
-            user = User(
-                username=f"{first_name}_{last_name}_{i + 1}",
+            user = CustomUser(
+                email=f"{first_name}_{last_name}_{i + 1}@gmail.com",
                 first_name=first_name,
                 last_name=last_name,
             )
