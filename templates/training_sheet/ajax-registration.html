@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %} Ajax Registration {% endblock title %}
+{% block content %}
+<style>
+  label {
+    width: 200px;
+  }
+
+  .required {
+    width: 500px;
+    position: relative;
+  }
+
+  .helptext {
+    display: none;
+    position: absolute;
+    left: calc(100%);
+    width: 300px;
+    top: 0;
+    border: 1px solid green;
+    border-radius: 15px;
+    padding: 5px;
+    padding-left: 20px;
+    ;
+  }
+
+  input:focus+.helptext {
+    display: block;
+  }
+
+  #errors {
+    color: red;
+  }
+
+</style>
+<h1>Ajax Registration</h1>
+<form id="ajaxRegistrationForm">
+  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token}}">
+  <div class="required">
+    <label for="id_email">E-mail:</label>
+    <input type="email" name="email" autofocus required id="id_email">
+  </div>
+  <div class="required">
+    <label for="id_first_name">First name:</label>
+    <input type="text" name="first_name" required id="id_first_name"></div>
+  <div class="required">
+    <label for="id_last_name">Last name:</label>
+    <input type="text" name="last_name" required id="id_last_name">
+  </div>
+  <div class="required">
+    <label for="password">Password:</label>
+    <input type="password" name="password" autocomplete="new-password" required id="id_password1">
+    <ul class="helptext">
+      <li>Your password can’t be too similar to your other personal information.</li>
+      <li>Your password must contain at least 8 characters.</li>
+      <li>Your password can’t be a commonly used password.</li>
+      <li>Your password can’t be entirely numeric.</li>
+    </ul>
+  </div>
+  <div class="required">
+    <label for="password_confirm">Password confirmation:</label>
+    <input type="password" name="password_confirm" autocomplete="new-password" required id="id_password2">
+    <div class="helptext">Enter the same password as before, for verification.</div>
+  </div>
+  <div id="errors"></div>
+  <input type="submit" value="Submit" />
+</form>
+<script>
+  const form = document.querySelector('#ajaxRegistrationForm');
+  const errorsBlock = document.querySelector('#errors');
+  const registerUrl = '/api/accounts/register/';
+
+  const getLabelByName = (name) => document.querySelector(`[name="${name}"]`).parentElement.querySelector('label').innerText;
+
+  form.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const data = Object.fromEntries(new FormData(ev.target));
+    const csrfToken = data.csrfmiddlewaretoken;
+    delete data.csrfmiddlewaretoken;
+
+    fetch(registerUrl, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        "x-csrftoken": data.csrfmiddlewaretoken,
+      },
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    })
+      .then(r => r.json())
+      .then((data) => {
+        if (data.id) {
+          // successful case
+          return window.location.pathname = '/accounts/login/'
+        }
+        errorsBlock.innerHTML = Object.keys(data)
+          .filter(key => Array.isArray(data[key]) && data[key].length)
+          .map(key => `<strong>${getLabelByName(key)}</strong> ${data[key].join()}`).join('<br />');
+      })
+      .catch((error) => {
+        console.error('Registration error:', error);
+        errorsBlock.innerHTML = 'Something went wgrong';
+      });
+  });
+
+</script>
+{% endblock content %}

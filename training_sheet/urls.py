@@ -32,4 +32,5 @@ urlpatterns = [
         name="training_sheet.course_delete",
     ),
     path("api/", include("training_sheet.api.urls", namespace="api")),
+    path("ajax-register/", views.AjaxRegistrationView.as_view(), name="ajax-register"),
 ]

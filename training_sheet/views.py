@@ -106,3 +106,7 @@ class ContactUsView(View):
             return redirect("trainging_sheet.soft_redirect")
 
         return render(request, "training_sheet/contact_us.html", context={"form": form})
+
+
+class AjaxRegistrationView(TemplateView):
+    template_name = "training_sheet/ajax-registration.html"
