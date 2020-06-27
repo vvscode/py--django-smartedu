@@ -1,25 +1,25 @@
-from rest_framework import generics
+from rest_framework import viewsets
 from ..models import Course, Tag, Student
 from .serializers import CourseSerializer, TagSerializer, StudentSerializer
 from rest_framework.permissions import IsAuthenticated
 
 
-class CourseListView(generics.ListAPIView):
+class CourseListView(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
 
-class CourseDetailView(generics.RetrieveAPIView):
+class CourseDetailView(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
 
-class TagListView(generics.ListAPIView):
+class TagListView(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
 
-class StudentListView(generics.ListAPIView):
+class StudentListView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
