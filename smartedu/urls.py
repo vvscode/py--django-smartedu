@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 
+from graphene_django.views import GraphQLView
+
 urlpatterns = [
     path("", include("training_sheet.urls"), name="training_sheet"),
     path("admin/", admin.site.urls),
     path("django-rq/", include("django_rq.urls")),
+    path("graphql/", GraphQLView.as_view(graphiql=True)),
 ]
 
 if settings.DEBUG:
