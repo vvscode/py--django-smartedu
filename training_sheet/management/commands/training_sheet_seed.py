@@ -3,6 +3,7 @@ from faker import Faker
 import random
 
 from training_sheet.models import Tag, Teacher, Course, CustomUser
+from datetime import datetime
 
 fake = Faker()
 
@@ -29,21 +30,26 @@ class Command(BaseCommand):
 
     def create_teachers(self):
         for i in range(10):
-            first_name = fake.first_name()
-            last_name = fake.last_name()
-            user = CustomUser(
-                email=f"{first_name}_{last_name}_{i + 1}@gmail.com",
-                first_name=first_name,
-                last_name=last_name,
-            )
-            user.save()
-            self.teachers.append(
-                Teacher.objects.create(
-                    user=user,
-                    job_title=get_job_title(),
-                    about_description=fake.paragraph(),
+            try:
+                first_name = fake.first_name()
+                last_name = fake.last_name()
+                timestamp = datetime.timestamp(datetime.now())
+                user = CustomUser(
+                    email=f"{first_name}_{last_name}_{timestamp + i}@gmail.com",
+                    first_name=first_name,
+                    last_name=last_name,
                 )
-            )
+                user.save()
+                self.teachers.append(
+                    Teacher.objects.create(
+                        user=user,
+                        job_title=get_job_title(),
+                        about_description=fake.paragraph(),
+                    )
+                )
+            except Exception as exc:
+                print(exc)
+
         self.stdout.write(self.style.SUCCESS("Teachers created"))
 
     def create_courses(self):
