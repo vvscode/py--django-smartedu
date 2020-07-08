@@ -153,7 +153,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 REDISTOGO_URL = os.getenv(
-    "REDISTOGO_URLxxx",
+    "REDIS_URL",
     "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601",
 )
 
