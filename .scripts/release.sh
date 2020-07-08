@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-python manage.py flush
+python manage.py flush --noinput
 
 rm -rf db.sqlite3
 
