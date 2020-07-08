@@ -218,7 +218,7 @@ CACHEOPS = {
     "training_sheet.*": {"ops": "all", "timeout": 60 * 15},
 }
 
-# CACHEOPS_REDIS = REDISTOGO_URL
+CACHEOPS_REDIS = REDISTOGO_URL
 
 # Temporary disable cors fro api https://github.com/adamchainz/django-cors-headers#cors_origin_allow_all
 CORS_ORIGIN_ALLOW_ALL = True
