@@ -154,7 +154,7 @@ STATIC_URL = "/static/"
 
 REDISTOGO_URL = os.getenv(
     "REDIS_URL",
-    "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601",
+    "redis://h:pd44ddbef65fdd5b9113660346fa70d54edbf7489e1d2c076d031a34db324f4e0@ec2-18-232-246-26.compute-1.amazonaws.com:32019",
 )
 
 # https://github.com/rq/django-rq#installation
