@@ -22,6 +22,7 @@ graphene-django = "*"
 django-registration-redux = "*"
 django-rest-registration = "*"
 django-cacheops = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.7"

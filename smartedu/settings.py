@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "graphene_django",
     "cacheops",
+    "corsheaders",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -158,11 +159,13 @@ REDISTOGO_URL = (
 # https://github.com/rq/django-rq#installation
 RQ_QUEUES = {
     "default": {
-        "URL": os.getenv("REDISTOGO_URL", REDISTOGO_URL,),  # If you're on Heroku
+        # If you're on Heroku
+        "URL": os.getenv("REDISTOGO_URL", REDISTOGO_URL,),
         "DEFAULT_TIMEOUT": 500,
     },
     "email": {
-        "URL": os.getenv("REDISTOGO_URL", REDISTOGO_URL,),  # If you're on Heroku
+        # If you're on Heroku
+        "URL": os.getenv("REDISTOGO_URL", REDISTOGO_URL,),
         "DEFAULT_TIMEOUT": 500,
     },
 }
@@ -215,3 +218,6 @@ CACHEOPS = {
 }
 
 CACHEOPS_REDIS = REDISTOGO_URL
+
+# Temporary disable cors fro api https://github.com/adamchainz/django-cors-headers#cors_origin_allow_all
+CORS_ORIGIN_ALLOW_ALL = True
