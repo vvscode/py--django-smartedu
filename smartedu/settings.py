@@ -152,20 +152,21 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-REDISTOGO_URL = (
-    "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601"
+REDISTOGO_URL = os.getenv(
+    "REDISTOGO_URL",
+    "redis://redistogo:24992c7adc16323adbc1e92b2f0431f8@hammerjaw.redistogo.com:11601",
 )
 
 # https://github.com/rq/django-rq#installation
 RQ_QUEUES = {
     "default": {
         # If you're on Heroku
-        "URL": os.getenv("REDISTOGO_URL", REDISTOGO_URL,),
+        "URL": REDISTOGO_URL,
         "DEFAULT_TIMEOUT": 500,
     },
     "email": {
         # If you're on Heroku
-        "URL": os.getenv("REDISTOGO_URL", REDISTOGO_URL,),
+        "URL": REDISTOGO_URL,
         "DEFAULT_TIMEOUT": 500,
     },
 }
