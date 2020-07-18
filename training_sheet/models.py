@@ -94,3 +94,9 @@ class Group(AbstractModel):
     course = models.ForeignKey(Course, on_delete=models.PROTECT)
     students = models.ManyToManyField(Student)
     group_teachers = models.ManyToManyField(Teacher)
+
+
+class ApplicationForTraining(AbstractModel):
+    group = models.OneToOneField(Group, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    comment = models.TextField()
