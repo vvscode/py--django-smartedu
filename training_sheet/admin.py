@@ -1,7 +1,15 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Teacher, Student, Tag, Course, Group, CustomUser
+from .models import (
+    Teacher,
+    Student,
+    Tag,
+    Course,
+    Group,
+    CustomUser,
+    ApplicationForTraining,
+)
 
 # Register your models here.
 admin.site.register(CustomUser)
@@ -10,6 +18,7 @@ admin.site.register(Student)
 admin.site.register(Tag)
 admin.site.register(Course)
 admin.site.register(Group)
+admin.site.register(ApplicationForTraining)
 
 
 class CustomUserAdmin(UserAdmin):

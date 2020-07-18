@@ -25,4 +25,9 @@ urlpatterns = [
         name="tag_list",
     ),
     path("accounts/", include("rest_registration.api.urls")),
+    path(
+        "applications/",
+        views.ApplicationForTrainingListAPIView.as_view(),
+        name="tag_list",
+    ),
 ]

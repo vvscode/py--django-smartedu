@@ -82,18 +82,20 @@ class Tag(AbstractModel):
     slug = models.SlugField()
 
 
+class Group(AbstractModel):
+    group_name = models.CharField(max_length=250)
+    course = models.ForeignKey(
+        "Course", on_delete=models.PROTECT, related_name="groups"
+    )
+    students = models.ManyToManyField(Student, blank=True)
+    group_teachers = models.ManyToManyField(Teacher, blank=True)
+
+
 class Course(AbstractModel):
     title = models.CharField(max_length=250)
     description = models.TextField()
-    tags = models.ManyToManyField(Tag)
-    course_teachers = models.ManyToManyField(Teacher)
-
-
-class Group(AbstractModel):
-    group_name = models.CharField(max_length=250)
-    course = models.ForeignKey(Course, on_delete=models.PROTECT)
-    students = models.ManyToManyField(Student)
-    group_teachers = models.ManyToManyField(Teacher)
+    tags = models.ManyToManyField(Tag, blank=True)
+    course_teachers = models.ManyToManyField(Teacher, blank=True)
 
 
 class ApplicationForTraining(AbstractModel):
