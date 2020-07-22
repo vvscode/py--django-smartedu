@@ -11,7 +11,7 @@ urlpatterns = [
     ),
     path(
         "courses/<pk>/",
-        views.CourseDetailView.as_view({"get": "list", "post": "create"}),
+        views.CourseDetailView.as_view({"get": "retrieve", "post": "create"}),
         name="course_details",
     ),
     path(
