@@ -1,0 +1,28 @@
+  version: '3'
+    
+  services:
+    redis:
+      image: 'bitnami/redis:latest'
+      environment:
+        - ALLOW_EMPTY_PASSWORD=yes
+
+    db:
+      image: postgres
+      environment:
+        - POSTGRES_DB=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+
+    web:
+      build: .
+      command: .scripts/run-in-docker.sh
+      volumes:
+        - .:/code
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+        - redis
+      environment:
+        - DATABASE_URL=postgresql://postgres:postgres@db/postgres
+        - REDIS_URL=redis://redis

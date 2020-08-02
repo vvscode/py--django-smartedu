@@ -42,3 +42,8 @@ Load data from file:
 ```
 python manage.py loaddata db.json
 ```
+
+To run app in docker with docker-compose: 
+```
+docker-compose up
+```
