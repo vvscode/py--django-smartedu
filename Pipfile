@@ -23,6 +23,7 @@ django-registration-redux = "*"
 django-rest-registration = "*"
 django-cacheops = "*"
 django-cors-headers = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"

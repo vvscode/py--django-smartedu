@@ -185,6 +185,9 @@ LOGIN_REDIRECT_URL = "training_sheet.index"
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
+# https://github.com/heroku/heroku-buildpack-pgbouncer/issues/118#issuecomment-440834985
+del DATABASES["default"]["OPTIONS"]["sslmode"]
+
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
